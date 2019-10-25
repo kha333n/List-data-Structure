@@ -1,22 +1,24 @@
 #include "List.h"
 using namespace std;
 
-List::List() //Default constructor.
+template <class T>
+List<T>::List() //Default constructor.
 {
-	headNode = new node();  //Creates a new node and store its address in headNode.
+	headNode = new node<T>();  //Creates a new node and store its address in headNode.
 	headNode->setNext(0);   //In the node created above stores the pointer value NULL or 0.
 	currentNode = 0;   
 	lastCurrentNode = 0;   //currentNode and lastCurrentNode are also has NULL pointer.
 	size = 0; //Size of list is 0.
 }
 
-void List::add(int addObject)
+template <class T>
+void List<T>::add(T addObject)
 {
 	// TODO: Add your implementation code here.
-	node *newNode = new node(); //To add a node in list first create new node.
+	node<T> *newNode = new node<T>(); //To add a node in list first create new node.
 	newNode->set(addObject);   //Insert the given value in the node.
 
-	if (currentNode != 0)  //If the pointer currentNode is not NULL or list is not empty then.
+	if (currentNode != nullptr)  //If the pointer currentNode is not NULL or list is not empty then.
 	{
 		newNode->setNext(currentNode->getNext());  //Insert the value of next node in the pointer of newNode.  So that it points to the next node if any in the list. 
 		currentNode->setNext(newNode);   //Point the current pointer to the newNode
@@ -33,11 +35,11 @@ void List::add(int addObject)
 	size++;  //increase the size of the list.
 }
 
-
-int List::get()
+template<class T>
+T List<T>::get()
 {
 	// TODO: Add your implementation code here.
-	if (currentNode != 0) //If currentNode is not at the last node in the list or list is not empty.
+	if (currentNode != nullptr) //If currentNode is not at the last node in the list or list is not empty.
 	{
 		return currentNode->get();  //Return the value in the node where the currentNode pointer is.
 	}
@@ -45,17 +47,17 @@ int List::get()
 
 }
 
-
-bool List::next()
+template <class T>
+bool List<T>::next()
 {
 	// TODO: Add your implementation code here.
-	if (currentNode == 0) //If currentNode is on the last node in the list.
+	if (currentNode == nullptr) //If currentNode is on the last node in the list.
 	{
 		return false;
 	}
 	lastCurrentNode = currentNode;
 	currentNode = currentNode->getNext();  //Point the currentNode pointer to the next node in the list.
-	if (currentNode == 0 || size == 0)  //If currentNode is on the last node or list is empty.
+	if (currentNode == nullptr || size == 0)  //If currentNode is on the last node or list is empty.
 	{
 		return false;
 	}
@@ -65,19 +67,19 @@ bool List::next()
 	}
 }
 
-
-void List::start() //Points the pointers to the start of the list.
+template <class T>
+void List<T>::start() //Points the pointers to the start of the list.
 {
 	// TODO: Add your implementation code here.
 	lastCurrentNode = headNode;
 	currentNode = headNode;
 }
 
-
-void List::remove()
+template <class T>
+void List<T>::remove()
 {
 	// TODO: Add your implementation code here.
-	if (currentNode != 0 && currentNode != headNode)  
+	if (currentNode != nullptr && currentNode != headNode)  
 	{
 		lastCurrentNode->setNext(currentNode->getNext());
 		/*
@@ -98,8 +100,8 @@ void List::remove()
 	}
 }
 
-
-int List::length()
+template <class T>
+int List<T>::length() const
 {
 	// TODO: Add your implementation code here.
 	return size;    //returns the length of the list.

@@ -1,18 +1,20 @@
+
 #pragma once
 #include "node.h"
+
+template <class T>
 class List
 {
-	node *headNode;
-	node *currentNode;
-	node *lastCurrentNode;
+	node<T> *headNode;
+	node<T> *currentNode;
+	node<T> *lastCurrentNode;
 	int size;
 public:
-	List();
-	void add(int addObject);
-	int get();
+	List<T>();
+	void add(T addObject);
+	T get();
 	bool next();
 	void start();
 	void remove();
-	int length();
+	int length() const;
 };
-
